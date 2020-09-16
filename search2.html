@@ -1,0 +1,135 @@
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PWA App | Search</title>
+
+<link href="styles.css" rel="stylesheet">
+<link rel="manifest" href="manifest.json" />
+<script type="text/javascript" src="js/menu.js"></script> 
+<script> 
+
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      console.log('successful');
+    }, function(err) {
+      console.log('failed: ', err);
+    });
+  });
+}
+
+//create a new web worker if not exist already
+function DoSomething(){
+    if (navigator.onLine == true) {
+
+  // innerhtml wipes my progress bar, so i added the below to re-add, i know its not the proper way but was easy fix for the time i had
+      document.querySelector(".gif").innerHTML = "";
+document.querySelector(".gif").innerHTML += "<div class ='text_box'><input id ='box_p' size'3' type 'input'>";
+document.querySelector(".gif").innerHTML += "<progress id='file' value='0' max='100'> 0% </progress>";
+ document.querySelector(".gif").innerHTML += "<div id = 'menu-flex'>Sorry can't access Flickr <br /> Try again later.</div>";
+
+   search_value = document.getElementById('search_input').value;
+   
+if (typeof(w) == "undefined") {
+ 
+    w = new Worker("search_script.js");
+}else{
+
+}
+navigator.serviceWorker.addEventListener('message', event => {
+  console.log(event.data.msg, event.data.url);
+});
+
+w.postMessage(search_value);
+w.onerror = function(event){
+    throw new Error(event.message + " (" + event.filename + ":" + event.lineno + ")");
+};
+
+//receive messages from web worker
+w.onmessage = function(event){
+   var myObj = JSON.parse(event.data);
+   console.log(myObj);
+if (myObj['finsihed'] == false) { //check if script has finsihed searching
+ 
+
+//updating progress bar
+document.querySelector('.gif').innerHTML += '<div class="box"><a href="'+myObj['link']+'">'+ myObj['title']  +'  </a></div>';
+  document.getElementById("file").value = (100 * myObj['number']) / 9254; //getting precentage
+   document.getElementById("box_p").value = (100 * myObj['number']) / 9254; //getting precentage
+  }else{
+    console.log("done");
+   document.getElementById("file").value = 100; 
+    document.getElementById("box_p").value = 100; 
+}
+}; 
+
+document.getElementById("search_input").addEventListener("click", function(){
+  console.log("test");
+});}else{
+
+
+document.querySelector(".gif").innerHTML = "";
+document.querySelector(".gif").innerHTML += "<div class ='text_box'><input id ='box' size'3' type 'input'>";
+document.querySelector(".gif").innerHTML += "<progress id='file' value='0' max='100'> 0% </progress>";
+ document.querySelector(".gif").innerHTML += "<div id = 'menu-flex'>Sorry can't access Flickr <br /> Try again later.</div>";
+ document.querySelector(".gif").innerHTML += "try again offline";
+}}
+
+
+
+</script>
+<div id = "sections">
+	
+<div>
+	<div id="pButton" onclick="menuFunction()">Product</div>
+  <div id="menu-wrapper">
+  	<p>Use The searchbox to find a film script.
+  </div>
+</div>
+
+<div id="data">Find Script
+  <div class="container">
+    <input type="text" id="search_input" />
+    <input type="image" src="icons/search.png" name="saveForm" class="btTxt submit" onclick="DoSomething();"  />
+  </div>
+</div>
+<div id="search">
+  <div class="container">
+    <input type="text" />
+    <img src="icons/search.png">
+  </div>
+</div>
+
+<div class ="gif">
+<div class ="text_box">
+                <input  id="box_p" size="3" type="input">
+</div>
+
+<progress id="file" value="0" max="100"> 0% </progress>
+
+
+</div>
+	 <div id="close" class="ass2-modal">
+    <div class="ass2-modal-content">
+      <div id="container">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-container" >
+     <a href="index.html"><p class="footer_text">Flicker Search</p></a>
+
+      <a href="search2.html"><p class="footer_text">Script Search</p></a>
+  </div>
+</div>
+<script>
+  var modal = document.getElementById('close');
+
+//click outside box to close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>

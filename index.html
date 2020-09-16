@@ -1,0 +1,74 @@
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<title>PWA App | Home</title>
+
+<link href="styles.css" rel="stylesheet">
+<link rel="manifest" href="manifest.json" />
+
+<link rel="apple-touch-icon" sizes="512x512" href="sun.png"> 
+<link rel="apple-touch-icon" sizes="256x256" href="sun_small.png"> 
+<link rel="apple-touch-icon" sizes="128x128" href="very_small_sun.png"> 
+
+<script type="text/javascript" src="js/images.js"></script> 
+<script type="text/javascript" src="js/menu.js"></script>  
+ 
+
+<div id = "sections">
+
+
+<div>
+  <div id="pButton" onclick="menuFunction()">Searches</div>
+  <div id="menu-wrapper">
+    <div class="menu-flex">Searches</div>
+
+  </div>
+</div>
+
+<div id="data">Search Flickr
+  <div class="container">
+    <button onclick="deleteCache()" type="button">Delete Flickr Cache</button> 
+  </div>
+</div>
+
+
+
+<div id="search">
+  <div class="container">
+    <input type="text" />
+    <img src="icons/search.png">
+  </div>
+</div>
+
+<div class ="gif">
+ 
+</div>
+ <div id="close" class="ass2-modal">
+    <div class="ass2-modal-content">
+      <div id="container">
+      </div>
+
+    </div>
+  </div>
+
+
+	<div class="footer-container" >
+		 <a href="index.html"><p class="footer_text">Flicker Search</p></a>
+
+   		<a href="search2.html"><p class="footer_text">Script Search</p></a>
+	</div>
+</div>
+
+<script>
+  // this is to close the model, closes when click anywhere
+  var modal = document.getElementById('close');
+  var modal1 = document.getElementById('container');
+
+window.onclick = function(event) {
+
+  if (event.target == modal ||event.target == modal1) {
+    modal.style.display = "none";
+  }
+
+}
+</script>

@@ -1,0 +1,27 @@
+{
+  "short_name": "PWA App",
+  "name": "Progressive Web Apps",
+  "description": "This is a PWA app using the Flickr API",
+  "icons": [
+    {
+      "src": "./images/sun_small.png",
+      "type": "image/png",
+      "sizes": "256x256"
+
+    },
+      {
+      "src": "./images/very_small_sun.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "./images/sun.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "theme_color": "#3367D6"
+}
